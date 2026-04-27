@@ -27,6 +27,7 @@ import AboutDialog from './AboutDialog.vue'
 import AppSelector from './AppSelector.vue'
 import { useUser } from '@/data/users'
 import { session } from '@/data/session'
+import router from '@/router'
 import { clear as clearIndexDb } from 'idb-keyval'
 import { useTheme } from '@/utils/useTheme'
 
@@ -44,9 +45,15 @@ const dropdownItems = computed(() => [
   {
     icon: 'user',
     label: '我的资料',
-    route: {
-      name: 'PersonProfile',
-      params: { personId: user.user_profile },
+    onClick: () => {
+      if (user.user_profile) {
+        router.push({
+          name: 'PersonProfile',
+          params: { personId: user.user_profile },
+        })
+      } else {
+        router.push({ name: 'People' })
+      }
     },
   },
   {

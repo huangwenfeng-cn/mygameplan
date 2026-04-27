@@ -19,15 +19,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
 import { TextEditor as FTextEditor } from 'frappe-ui'
 import FloatingQuoteButton from './RichQuoteExtension/floating-quote-button'
 import RichQuoteNodeExtension from './RichQuoteExtension/rich-quote-node-extension'
 import TextEditorMentionComponent from './TextEditorMentionComponent.vue'
 import { activeUsers } from '@/data/users'
 import { tags as _tags } from '@/data/tags'
+import { startTextEditorDynamicLocalization } from '@/utils/textEditorDynamicLocalization'
 
 const textEditor = useTemplateRef<InstanceType<typeof FTextEditor>>('textEditor')
+let stopDynamicLocalization: (() => void) | null = null
 
 const emit = defineEmits(['rich-quote', 'rich-quote-click'])
 
@@ -71,6 +73,15 @@ const extensions = computed(() => {
       },
     }),
   ]
+})
+
+onMounted(() => {
+  stopDynamicLocalization = startTextEditorDynamicLocalization()
+})
+
+onBeforeUnmount(() => {
+  stopDynamicLocalization?.()
+  stopDynamicLocalization = null
 })
 
 defineExpose({ editor })

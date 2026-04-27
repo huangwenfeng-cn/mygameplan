@@ -41,7 +41,7 @@
               <template #prefix v-if="newTask.doc.status">
                 <TaskStatusIcon :status="newTask.doc.status" />
               </template>
-              {{ newTask.doc.status }}
+              {{ statusLabel(newTask.doc.status) }}
             </Button>
           </Dropdown>
         </div>
@@ -52,7 +52,7 @@
       <Button class="w-full relative" variant="solid" @click="onCreateClick">
         创建
         <div class="absolute right-0 top-0 h-7 pr-2 flex items-center justify-center">
-          <KeyboardShortcut ctrl> Enter </KeyboardShortcut>
+          <KeyboardShortcut ctrl> 回车 </KeyboardShortcut>
         </div>
       </Button>
     </template>
@@ -76,7 +76,7 @@ function statusOptions() {
     (status) => {
       return {
         icon: () => h(TaskStatusIcon, { status }),
-        label: status,
+        label: statusLabel(status),
         onClick: () => {
           if (newTask.value) {
             newTask.value.doc.status = status
@@ -84,6 +84,18 @@ function statusOptions() {
         },
       }
     },
+  )
+}
+
+function statusLabel(status: GPTask['status']) {
+  return (
+    {
+      Backlog: '待办池',
+      Todo: '待处理',
+      'In Progress': '进行中',
+      Done: '已完成',
+      Canceled: '已取消',
+    }[status] || status
   )
 }
 

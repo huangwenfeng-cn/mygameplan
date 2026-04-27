@@ -236,7 +236,7 @@ function dropdownOptions(name: string) {
 function statusOptions({ onClick }: { onClick: (status: GPTask['status']) => void }) {
   return ['Backlog', 'Todo', 'In Progress', 'Done', 'Canceled'].map((status) => ({
     icon: () => h(TaskStatusIcon, { status }),
-    label: status,
+    label: statusLabel(status),
     onClick: () => onClick(status as GPTask['status']),
   }))
 }

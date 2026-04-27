@@ -106,9 +106,9 @@
             <template v-else-if="searchResponse?.summary">
               <div class="space-y-1">
                 <p class="text-ink-gray-6">
-                  {{ searchResponse.summary.filtered_matches }} matches ({{
+                  {{ searchResponse.summary.filtered_matches }} 条匹配（{{
                     searchResponse.summary.duration
-                  }}s)
+                  }} 秒）
                   <span v-if="hasActiveFilters()">
                     •
                     已应用 {{ Object.keys(searchResponse.summary.applied_filters || {}).length }} 个筛选条件

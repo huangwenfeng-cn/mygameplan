@@ -91,6 +91,7 @@ import TextEditor from '@/components/TextEditor.vue'
 import { vFocus } from '@/directives'
 import UserProfileLink from '@/components/UserProfileLink.vue'
 import { TextEditorFixedMenu } from 'frappe-ui'
+import { localizeEditorButtons } from '@/utils/textEditorButtons'
 
 export default {
   name: 'ProjectDiscussionNew',
@@ -209,7 +210,7 @@ export default {
   },
   computed: {
     textEditorMenuButtons() {
-      return [
+      return localizeEditorButtons([
         'Paragraph',
         ['Heading 2', 'Heading 3', 'Heading 4', 'Heading 5', 'Heading 6'],
         'Separator',
@@ -248,7 +249,7 @@ export default {
         'Separator',
         'Undo',
         'Redo',
-      ]
+      ])
     },
   },
 }

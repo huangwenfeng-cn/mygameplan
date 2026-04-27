@@ -3,7 +3,7 @@
     class="space-breadcrumbs"
     :items="[
       {
-        label: category?.title || 'Spaces',
+        label: category?.title || '空间',
         route: { name: 'Spaces', query: category ? { teamId: category.name } : undefined },
       },
       {

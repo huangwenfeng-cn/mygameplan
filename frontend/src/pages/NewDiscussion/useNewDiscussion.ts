@@ -179,11 +179,11 @@ export function useNewDiscussion(textEditorRef?: TextEditorRef) {
 
     errorMessage.value = null
     if (!draftData.value.title) {
-      errorMessage.value = 'Please enter title.'
+      errorMessage.value = '请输入标题。'
       return false
     }
     if (checkProject && !draftData.value.project) {
-      errorMessage.value = 'Please select a space.'
+      errorMessage.value = '请选择空间。'
       return false
     }
     return true
@@ -280,11 +280,11 @@ export function useNewDiscussion(textEditorRef?: TextEditorRef) {
 
   function deleteDraft() {
     createDialog({
-      title: 'Delete draft',
-      message: 'Are you sure you want to delete this draft?',
+      title: '删除草稿',
+      message: '确定要删除此草稿吗？',
       actions: [
         {
-          label: 'Delete draft',
+          label: '删除草稿',
           onClick: ({ close }) => {
             return draftDoc.value?.delete.submit().then(() => {
               resetValues()
@@ -302,11 +302,11 @@ export function useNewDiscussion(textEditorRef?: TextEditorRef) {
   function discard() {
     if (!textEditorRef?.value?.editor?.isEmpty || draftData.value.title) {
       createDialog({
-        title: 'Discard post',
-        message: 'Are you sure you want to discard your post?',
+        title: '放弃帖子',
+        message: '确定要放弃这条帖子吗？',
         actions: [
           {
-            label: 'Discard post',
+            label: '放弃帖子',
             onClick: ({ close }) => {
               resetValues()
               router.back()
@@ -365,11 +365,11 @@ export function useNewDiscussion(textEditorRef?: TextEditorRef) {
       }
       if (isDraftChanged.value) {
         createDialog({
-          title: 'Unsaved Changes',
-          message: 'You have unsaved changes. Do you want to save them before leaving?',
+          title: '未保存的更改',
+          message: '你有尚未保存的更改，离开前是否保存为草稿？',
           actions: [
             {
-              label: 'Discard',
+              label: '放弃',
               variant: 'subtle',
               onClick: ({ close }) => {
                 resetValues()
@@ -378,7 +378,7 @@ export function useNewDiscussion(textEditorRef?: TextEditorRef) {
               },
             },
             {
-              label: 'Save Draft',
+              label: '保存草稿',
               variant: 'solid',
               onClick: async ({ close }) => {
                 try {

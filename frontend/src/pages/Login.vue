@@ -4,7 +4,7 @@
       <GameplanLogo class="mx-auto h-8 w-8" />
       <div class="mt-6 flex items-center justify-center space-x-1.5">
         <span class="text-3xl font-semibold text-ink-gray-8">登录到</span>
-        <GameplanLogoType class="h-6 text-ink-gray-8" />
+        <span class="text-3xl font-semibold text-ink-gray-8">项目管理</span>
       </div>
       <div class="mx-auto mt-6 w-full px-4 sm:w-96">
         <form v-if="showEmailLogin" @submit.prevent="submit">
@@ -65,7 +65,6 @@ import { FormControl } from 'frappe-ui'
 import { useCall } from 'frappe-ui'
 import { session } from '@/data/session'
 import GameplanLogo from '@/components/GameplanLogo.vue'
-import GameplanLogoType from '@/components/GameplanLogoType.vue'
 
 let showEmailLogin = ref(false)
 let email = ref('')

@@ -85,7 +85,7 @@
               <template #prefix>
                 <TaskStatusIcon :status="task.doc.status" />
               </template>
-              {{ task.doc.status || '设置状态' }}
+              {{ task.doc.status ? statusLabel(task.doc.status) : '设置状态' }}
             </Button>
           </Dropdown>
           <Dropdown :options="priorityOptions">
@@ -148,7 +148,7 @@
               <template #prefix>
                 <TaskStatusIcon :status="task.doc.status" />
               </template>
-              {{ task.doc.status || '设置状态' }}
+              {{ task.doc.status ? statusLabel(task.doc.status) : '设置状态' }}
             </Button>
           </Dropdown>
         </div>
@@ -216,7 +216,7 @@ const statusOptions = computed(() =>
   (['Backlog', 'Todo', 'In Progress', 'Done', 'Canceled'] as Array<GPTask['status']>).map(
     (status) => ({
       icon: () => h(TaskStatusIcon, { status }),
-      label: status,
+      label: statusLabel(status),
       onClick: () => task.setValue.submit({ status }),
     }),
   ),
@@ -259,5 +259,17 @@ function updateRoute() {
           },
     })
   }
+}
+
+function statusLabel(status: GPTask['status']) {
+  return (
+    {
+      Backlog: '待办池',
+      Todo: '待处理',
+      'In Progress': '进行中',
+      Done: '已完成',
+      Canceled: '已取消',
+    }[status] || status
+  )
 }
 </script>
