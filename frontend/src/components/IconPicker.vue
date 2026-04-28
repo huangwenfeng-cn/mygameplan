@@ -27,7 +27,7 @@
           <div class="w-96"></div>
           <div class="px-3" v-for="(emojis, group) in emojiGroups" :key="group">
             <div class="sticky top-0 bg-surface-white pb-2 pt-3 text-sm text-ink-gray-6">
-              {{ group }}
+              {{ localizeCategory(group) }}
             </div>
             <div class="grid w-96 grid-cols-12 place-items-center">
               <button
@@ -91,6 +91,22 @@ export default {
     },
   },
   methods: {
+    localizeCategory(category) {
+      return (
+        {
+          'Smileys & Emotion': '笑脸与表情',
+          'People & Body': '人物与身体',
+          'Animals & Nature': '动物与自然',
+          'Food & Drink': '食物与饮品',
+          'Travel & Places': '旅行与地点',
+          Activities: '活动',
+          Objects: '物品',
+          Symbols: '符号',
+          Flags: '旗帜',
+          无结果: '无结果',
+        }[category] || category
+      )
+    },
     setRandom() {
       let total = gemoji.length
       let index = randomInt(0, total - 1)
