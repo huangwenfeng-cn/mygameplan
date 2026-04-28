@@ -3,7 +3,7 @@
 
 frappe.ui.form.on("GP Discussion", {
   refresh: function (frm) {
-    frm.add_custom_button(__("在项目协作中查看"), function () {
+    frm.add_custom_button(__("在团队协作中查看"), function () {
       window.open(`/g/space/${frm.doc.project}/discussion/${frm.doc.name}`);
     });
   },

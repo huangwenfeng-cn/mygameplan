@@ -8,4 +8,4 @@ Configuration for docs
 
 
 def get_context(context):
-	context.brand_html = "项目协作"
+	context.brand_html = "团队协作"

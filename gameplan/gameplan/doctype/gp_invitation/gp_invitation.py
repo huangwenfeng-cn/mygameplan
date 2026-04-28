@@ -28,7 +28,7 @@ class GPInvitation(Document):
 			print(f"Invite link for {self.email}: {invite_link}")
 			return
 
-		title = "项目协作"
+		title = "团队协作"
 		template = "gameplan_invitation"
 
 		frappe.sendmail(

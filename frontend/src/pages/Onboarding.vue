@@ -44,7 +44,7 @@
     </div>
     <div class="body-container pt-14">
       <div class="max-w-xl mx-auto">
-        <div class="text-2xl font-semibold text-ink-gray-8">欢迎使用项目协作</div>
+        <div class="text-2xl font-semibold text-ink-gray-8">欢迎使用团队协作</div>
 
         <div class="mt-2 pt-8 border-t">
           <h2 class="text-base font-medium text-ink-gray-8 mb-2">创建你的第一个空间</h2>

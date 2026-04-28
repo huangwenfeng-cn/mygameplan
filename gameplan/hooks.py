@@ -1,18 +1,18 @@
 app_name = "gameplan"
-app_title = "项目协作"
+app_title = "团队协作"
 app_publisher = "Frappe Technologies Pvt Ltd"
 app_description = "Team discussion and collaboration tool"
 app_email = "faris@frappe.io"
 app_license = "AGPLv3"
 app_icon_url = "/assets/gameplan/manifest/favicon-180.png"
-app_icon_title = "项目协作"
+app_icon_title = "团队协作"
 app_icon_route = "/g"
 
 add_to_apps_screen = [
 	{
 		"name": "gameplan",
 		"logo": "/assets/gameplan/manifest/favicon-196.png",
-		"title": "项目协作",
+		"title": "团队协作",
 		"route": "/g",
 		"has_permission": "gameplan.api.can_access_gameplan",
 	}

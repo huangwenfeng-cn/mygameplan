@@ -16,7 +16,7 @@
     <template #body-content>
       <div class="space-y-2">
         <p class="text-ink-gray-7 text-base">
-          选择打开项目协作时默认进入的页面。
+          选择打开团队协作时默认进入的页面。
         </p>
 
         <RadioGroupRoot class="space-y-1" v-model="selectedHomePage">
