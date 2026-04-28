@@ -11,7 +11,7 @@
   </FrappeUIProvider>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, defineAsyncComponent, onBeforeUnmount, onMounted } from 'vue'
 import { FrappeUIProvider } from 'frappe-ui'
 import { ScrollAreaRoot } from 'reka-ui'
