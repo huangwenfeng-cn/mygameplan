@@ -197,6 +197,48 @@ const localFrappeUIAliases = useLocalFrappeUI ? {
 
 - [Discuss Gameplan](https://github.com/frappe/gameplan/discussions)
 
+## 从自定义仓库更新与重装（Docker / bench）
+
+以下命令适用于使用 `docker exec` 进入 Frappe 容器并通过 `bench` 更新的场景。
+
+### 1. 本地提交并推送到你的仓库
+
+```bash
+cd d:/Local/Code/gameplan-develop
+git add .
+git commit -m "chore: update ui text and deployment docs"
+git push https://github.com/huangwenfeng-cn/mygameplan.git main
+```
+
+### 2. 容器内拉取最新代码并更新应用（推荐日常更新）
+
+```bash
+docker exec -it <frappe_container_name> bash
+cd /home/frappe/frappe-bench/apps/gameplan
+git fetch --all
+git checkout main
+git pull https://github.com/huangwenfeng-cn/mygameplan.git main
+
+cd /home/frappe/frappe-bench
+bench --site <site_name> migrate
+bench build --app gameplan
+bench restart
+```
+
+### 3. 如果 `gameplan` 被删除，重新拉取并安装
+
+```bash
+docker exec -it <frappe_container_name> bash
+cd /home/frappe/frappe-bench
+bench get-app https://github.com/huangwenfeng-cn/mygameplan.git --branch main
+bench --site <site_name> install-app gameplan
+bench --site <site_name> migrate
+bench build --app gameplan
+bench restart
+```
+
+如果 `install-app` 提示已安装，可跳过该步骤，直接执行 `migrate/build/restart`。
+
 <br>
 <br>
 <div align="center">
