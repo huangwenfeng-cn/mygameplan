@@ -85,7 +85,7 @@
               <template #prefix>
                 <TaskStatusIcon :status="task.doc.status" />
               </template>
-              {{ task.doc.status || '设置状态' }}
+              {{ (task.doc.status && statusText[task.doc.status]) || '设置状态' }}
             </Button>
           </Dropdown>
           <Dropdown :options="priorityOptions">
@@ -148,7 +148,7 @@
               <template #prefix>
                 <TaskStatusIcon :status="task.doc.status" />
               </template>
-              {{ task.doc.status || '设置状态' }}
+              {{ (task.doc.status && statusText[task.doc.status]) || '设置状态' }}
             </Button>
           </Dropdown>
         </div>
@@ -212,11 +212,20 @@ const assignableUsers = computed<{ label: string; value: string }[]>(() => {
   )
 })
 
+// 仅用于界面中文显示，不改变状态实际存储值（仍为英文）
+const statusText: Record<GPTask['status'], string> = {
+  Backlog: '待办池',
+  Todo: '待处理',
+  'In Progress': '进行中',
+  Done: '已完成',
+  Canceled: '已取消',
+}
+
 const statusOptions = computed(() =>
   (['Backlog', 'Todo', 'In Progress', 'Done', 'Canceled'] as Array<GPTask['status']>).map(
     (status) => ({
       icon: () => h(TaskStatusIcon, { status }),
-      label: status,
+      label: statusText[status],
       onClick: () => task.setValue.submit({ status }),
     }),
   ),

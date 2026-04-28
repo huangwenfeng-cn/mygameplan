@@ -41,7 +41,7 @@
               <template #prefix v-if="newTask.doc.status">
                 <TaskStatusIcon :status="newTask.doc.status" />
               </template>
-              {{ newTask.doc.status }}
+              {{ statusText[newTask.doc.status] || newTask.doc.status }}
             </Button>
           </Dropdown>
         </div>
@@ -70,13 +70,21 @@ import KeyboardShortcut from '../KeyboardShortcut.vue'
 
 const titleInput = useTemplateRef('titleInput')
 let spaceOptions = useGroupedSpaceOptions({ filterFn: (space) => !space.archived_at })
+// 仅用于界面中文显示，不改变状态实际存储值（仍为英文）
+const statusText: Record<GPTask['status'], string> = {
+  Backlog: '待办池',
+  Todo: '待处理',
+  'In Progress': '进行中',
+  Done: '已完成',
+  Canceled: '已取消',
+}
 
 function statusOptions() {
   return (['Backlog', 'Todo', 'In Progress', 'Done', 'Canceled'] as GPTask['status'][]).map(
     (status) => {
       return {
         icon: () => h(TaskStatusIcon, { status }),
-        label: status,
+        label: statusText[status],
         onClick: () => {
           if (newTask.value) {
             newTask.value.doc.status = status
