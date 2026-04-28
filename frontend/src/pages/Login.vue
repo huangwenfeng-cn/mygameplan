@@ -4,7 +4,7 @@
       <GameplanLogo class="mx-auto h-8 w-8" />
       <div class="mt-6 flex items-center justify-center space-x-1.5">
         <span class="text-3xl font-semibold text-ink-gray-8">登录到</span>
-        <span class="text-3xl font-semibold text-ink-gray-8">项目管理</span>
+        <span class="text-3xl font-semibold text-ink-gray-8">项目协作</span>
       </div>
       <div class="mx-auto mt-6 w-full px-4 sm:w-96">
         <form v-if="showEmailLogin" @submit.prevent="submit">

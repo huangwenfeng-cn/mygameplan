@@ -7,7 +7,7 @@
       >
         <GameplanLogo class="w-8 h-8 rounded" />
         <div class="ml-2 flex flex-col">
-          <div class="text-base font-medium text-ink-gray-8 leading-none">项目管理</div>
+          <div class="text-base font-medium text-ink-gray-8 leading-none">项目协作</div>
           <div class="mt-1 hidden text-sm text-ink-gray-6 sm:inline leading-none">
             {{ user.full_name }}
           </div>
