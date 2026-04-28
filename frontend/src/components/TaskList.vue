@@ -7,7 +7,7 @@
         @click="isOpen[group.title] = !isOpen[group.title]"
       >
         <span class="font-medium text-ink-gray-8">
-          {{ statusLabel(group.title) }}
+          {{ group.title }}
         </span>
         <span class="ml-2 text-sm text-ink-gray-5">{{ group.tasks.length }}</span>
         <span class="ml-auto hidden text-sm text-ink-gray-5 group-hover:inline">
@@ -236,22 +236,10 @@ function dropdownOptions(name: string) {
 function statusOptions({ onClick }: { onClick: (status: GPTask['status']) => void }) {
   return ['Backlog', 'Todo', 'In Progress', 'Done', 'Canceled'].map((status) => ({
     icon: () => h(TaskStatusIcon, { status }),
-    label: statusLabel(status),
+    label: status,
     onClick: () => onClick(status as GPTask['status']),
   }))
 }
 
 defineExpose({ tasks })
-
-function statusLabel(status: string) {
-  return (
-    {
-      Backlog: '待办池',
-      Todo: '待处理',
-      'In Progress': '进行中',
-      Done: '已完成',
-      Canceled: '已取消',
-    }[status] || status
-  )
-}
 </script>

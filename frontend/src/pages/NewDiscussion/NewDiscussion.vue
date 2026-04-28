@@ -36,7 +36,6 @@
 import { useTemplateRef } from 'vue'
 import { TextEditorFixedMenu } from 'frappe-ui'
 import TextEditor from '@/components/TextEditor.vue'
-import { localizeEditorButtons } from '@/utils/textEditorButtons'
 import DiscussionHeader from './DiscussionHeader.vue'
 import DiscussionMetadata from './DiscussionMetadata.vue'
 import DiscussionEditor from './DiscussionEditor.vue'
@@ -44,7 +43,7 @@ import { provideNewDiscussion } from './useNewDiscussion'
 
 const textEditorRef = useTemplateRef<InstanceType<typeof TextEditor>>('textEditorRef')
 
-const textEditorMenuButtons = localizeEditorButtons([
+const textEditorMenuButtons = [
   'Paragraph',
   ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4', 'Heading 5', 'Heading 6'],
   'Separator',
@@ -89,7 +88,7 @@ const textEditorMenuButtons = localizeEditorButtons([
   'Separator',
   'Undo',
   'Redo',
-])
+]
 
 const { draftData, sessionUser, author, initialize } = provideNewDiscussion(textEditorRef)
 

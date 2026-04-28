@@ -29,7 +29,6 @@
 import { EditorContent } from '@tiptap/vue-3'
 import TextEditor from '@/components/TextEditor.vue'
 import { TextEditorFixedMenu } from 'frappe-ui'
-import { localizeEditorButtons } from '@/utils/textEditorButtons'
 
 export default {
   name: 'CommentEditor',
@@ -67,7 +66,7 @@ export default {
       return this.$refs.textEditor.editor
     },
     textEditorMenuButtons() {
-      return localizeEditorButtons([
+      return [
         'Paragraph',
         ['Heading 2', 'Heading 3', 'Heading 4', 'Heading 5', 'Heading 6'],
         'Separator',
@@ -104,7 +103,7 @@ export default {
           'ToggleHeaderCell',
           'DeleteTable',
         ],
-      ])
+      ]
     },
   },
 }

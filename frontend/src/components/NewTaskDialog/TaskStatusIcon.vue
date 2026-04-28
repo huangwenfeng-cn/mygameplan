@@ -5,7 +5,7 @@
     height="16"
     fill="none"
     class="text-ink-gray-6"
-    :aria-label="statusLabel"
+    :aria-label="status"
   >
     <path
       v-if="status == 'Backlog'"
@@ -51,19 +51,6 @@ export default {
     status: {
       type: String,
       required: true,
-    },
-  },
-  computed: {
-    statusLabel() {
-      return (
-        {
-          Backlog: '待办池',
-          Todo: '待处理',
-          'In Progress': '进行中',
-          Done: '已完成',
-          Canceled: '已取消',
-        }[this.status] || this.status
-      )
     },
   },
 }

@@ -56,7 +56,7 @@
     </template>
     <template #actions>
       <div class="flex items-center space-x-2 justify-end">
-        <Button @click="show = false">取消</Button>
+      <Button>取消</Button>
         <Button variant="solid" @click="submit" :loading="newSpace.loading">提交</Button>
       </div>
     </template>

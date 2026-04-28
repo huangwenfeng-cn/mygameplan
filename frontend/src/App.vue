@@ -11,15 +11,14 @@
   </FrappeUIProvider>
 </template>
 
-<script setup lang="ts">
-import { computed, defineAsyncComponent, onBeforeUnmount, onMounted } from 'vue'
+<script setup>
+import { computed, defineAsyncComponent } from 'vue'
 import { FrappeUIProvider } from 'frappe-ui'
 import { ScrollAreaRoot } from 'reka-ui'
 import { Dialogs } from '@/utils/dialogs'
 import { users } from '@/data/users'
 import { useScreenSize } from '@/composables/useScreenSize'
 import NewTaskDialog from './components/NewTaskDialog/NewTaskDialog.vue'
-import { startTextEditorDynamicLocalization } from '@/utils/textEditorDynamicLocalization'
 
 const screenSize = useScreenSize()
 const MobileLayout = defineAsyncComponent(() => import('./components/MobileLayout.vue'))
@@ -33,15 +32,4 @@ const Layout = computed(() => {
 })
 
 users.fetch()
-
-let stopDynamicLocalization: (() => void) | null = null
-
-onMounted(() => {
-  stopDynamicLocalization = startTextEditorDynamicLocalization()
-})
-
-onBeforeUnmount(() => {
-  stopDynamicLocalization?.()
-  stopDynamicLocalization = null
-})
 </script>

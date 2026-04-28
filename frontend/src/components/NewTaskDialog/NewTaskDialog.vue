@@ -41,7 +41,7 @@
               <template #prefix v-if="newTask.doc.status">
                 <TaskStatusIcon :status="newTask.doc.status" />
               </template>
-              {{ statusLabel(newTask.doc.status) }}
+              {{ newTask.doc.status }}
             </Button>
           </Dropdown>
         </div>
@@ -76,7 +76,7 @@ function statusOptions() {
     (status) => {
       return {
         icon: () => h(TaskStatusIcon, { status }),
-        label: statusLabel(status),
+        label: status,
         onClick: () => {
           if (newTask.value) {
             newTask.value.doc.status = status
@@ -84,18 +84,6 @@ function statusOptions() {
         },
       }
     },
-  )
-}
-
-function statusLabel(status: GPTask['status']) {
-  return (
-    {
-      Backlog: '待办池',
-      Todo: '待处理',
-      'In Progress': '进行中',
-      Done: '已完成',
-      Canceled: '已取消',
-    }[status] || status
   )
 }
 
