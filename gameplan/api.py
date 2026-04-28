@@ -26,34 +26,39 @@ def get_user_info(user=None):
 		order_by="full_name asc",
 		distinct=True,
 	).run(as_dict=1)
+	user_names = [u.name for u in users]
 
 	# Get discussion counts for last 3 months
-	Discussion = frappe.qb.DocType("GP Discussion")
-	discussion_counts = (
-		frappe.qb.from_(Discussion)
-		.select(Discussion.owner, Count(Discussion.name).as_("count"))
-		.where(Discussion.creation >= frappe.utils.add_months(frappe.utils.now(), -3))
-		.where(Discussion.owner.isin([u.name for u in users]))
-		.groupby(Discussion.owner)
-	).run(as_dict=1)
-	discussion_count_map = {d.owner: d.count for d in discussion_counts}
+	discussion_count_map = {}
+	if user_names:
+		Discussion = frappe.qb.DocType("GP Discussion")
+		discussion_counts = (
+			frappe.qb.from_(Discussion)
+			.select(Discussion.owner, Count(Discussion.name).as_("count"))
+			.where(Discussion.creation >= frappe.utils.add_months(frappe.utils.now(), -3))
+			.where(Discussion.owner.isin(user_names))
+			.groupby(Discussion.owner)
+		).run(as_dict=1)
+		discussion_count_map = {d.owner: d.count for d in discussion_counts}
 
 	# Get comment counts for last 3 months
-	Comment = frappe.qb.DocType("GP Comment")
-	comment_counts = (
-		frappe.qb.from_(Comment)
-		.select(Comment.owner, Count(Comment.name).as_("count"))
-		.where(Comment.creation >= frappe.utils.add_months(frappe.utils.now(), -3))
-		.where(Comment.owner.isin([u.name for u in users]))
-		.groupby(Comment.owner)
-	).run(as_dict=1)
-	comment_count_map = {c.owner: c.count for c in comment_counts}
+	comment_count_map = {}
+	if user_names:
+		Comment = frappe.qb.DocType("GP Comment")
+		comment_counts = (
+			frappe.qb.from_(Comment)
+			.select(Comment.owner, Count(Comment.name).as_("count"))
+			.where(Comment.creation >= frappe.utils.add_months(frappe.utils.now(), -3))
+			.where(Comment.owner.isin(user_names))
+			.groupby(Comment.owner)
+		).run(as_dict=1)
+		comment_count_map = {c.owner: c.count for c in comment_counts}
 
 	roles = frappe.db.get_all("Has Role", filters={"parenttype": "User"}, fields=["role", "parent"])
 	user_profiles = frappe.db.get_all(
 		"GP User Profile",
 		fields=["user", "name", "image", "image_background_color", "is_image_background_removed", "bio"],
-		filters={"user": ["in", [u.name for u in users]]},
+		filters={"user": ["in", user_names]},
 	)
 	user_profile_map = {u.user: u for u in user_profiles}
 	for user in users:
